@@ -1961,6 +1961,10 @@ func decodeObjectStreams(ctx *Context) error {
 			return errors.Errorf("decodeObjectStream: missing entry for obj#%d\n", objectNumber)
 		}
 
+		if entry.Free || entry.Compressed {
+			continue
+		}
+
 		log.Read.Printf("decodeObjectStreams: parsing object stream for obj#%d\n", objectNumber)
 
 		// Parse object stream from file.
